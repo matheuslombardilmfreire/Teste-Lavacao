@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lavanderia Lavação – Florianópolis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #8fc0dc;
+      --yellow: #fbc900;
+      --dark: #0f1a22;
+      --dark2: #d4eaf5;
+      --dark3: #bee0f0;
+      --white: #0f1a22;
+      --gray: #1e3245;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Jost', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--blue);
+      color: #0f1a22;
+      overflow-x: hidden;
+    }
+
+    /* ─── LANG SWITCH ─── */
+    .lang-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0;
+      background: linear-gradient(135deg, #8fc0dc 0%, #6aaac8 100%);
+      padding: 6px 24px;
+      border-bottom: 1px solid rgba(15,26,34,.1);
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: #0f1a22;
+      font-family: var(--font-body);
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 999px;
+      transition: all .25s;
+    }
+    .lang-btn.active {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+    .lang-btn:hover:not(.active) { color: rgba(15,26,34,.6); }
+    .lang-divider { color: rgba(15,26,34,.4); font-size: .8rem; }
+
+    /* ─── HEADER / NAV ─── */
+    header {
+      position: fixed;
+      top: 32px; left: 0; right: 0;
+      z-index: 999;
+      background: linear-gradient(135deg, var(--blue) 0%, #6aaac8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      box-shadow: 0 4px 40px rgba(0,0,0,.35);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo img { display: block; height: 52px; width: auto; }
+
+    nav { display: flex; gap: 2px; align-items: center; }
+    nav a {
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 2px;
+      transition: background .2s;
+    }
+    nav a:hover { background: rgba(0,0,0,.1); }
+    .nav-cta {
+      background: var(--yellow) !important;
+      color: var(--dark) !important;
+      margin-left: 8px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #e6b700 !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 140px 5vw 80px;
+      overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=1600&q=80'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(10,75,130,0.96); }
+    .hero-content {
+      position: relative;
+      max-width: 820px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      font-size: .7rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 32px;
+      animation: fadeUp .8s ease both;
+    }
+    .hero-badge::before { content: '★'; font-size: .7rem; }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: #f8f4ef;
+      margin-bottom: 16px;
+      animation: fadeUp .9s .1s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: #fbc900;
+    }
+    .hero-title-es {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gray);
+      margin-bottom: 28px;
+      animation: fadeUp 1s .2s ease both;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #ffffff;
+      max-width: 540px;
+      margin: 0 auto 44px;
+      line-height: 1.75;
+      animation: fadeUp 1s .3s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 1s .4s ease both;
+    }
+    .btn-primary {
+      background: var(--yellow);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 999px;
+      transition: all .25s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: #e6b700; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(251,201,0,.35); }
+    .btn-outline {
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 2px;
+      transition: all .25s;
+    }
+    .btn-outline:hover { background: var(--blue); color: var(--dark); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--gray); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      animation: pulse 2s infinite;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gray), transparent);
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 100px 5vw; }
+    .section-label {
+      font-size: 1.5rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: #fbc900;
+      font-weight: 800;
+      margin-bottom: 12px;
+      text-align: center;
+      display: block;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .section-title em { font-style: italic; color: #0f6e9a; }
+    .section-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #1e3245;
+      max-width: 600px;
+    }
+
+    /* ─── SOBRE ─── */
+    #sobre {
+      background: #7db8d8;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .sobre-grid--noimg {
+      grid-template-columns: 1fr;
+      max-width: 800px;
+    }
+    .sobre-grid--noimg .sobre-text { padding-right: 0; }
+    .sobre-img-wrap {
+      position: relative;
+    }
+    .sobre-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+      filter: brightness(.9) saturate(.85);
+    }
+    .sobre-img-badge {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      background: var(--yellow);
+      color: var(--dark);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 20px 24px;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .sobre-img-badge span { display: block; font-size: .65rem; font-family: var(--font-body); letter-spacing: .15em; text-transform: uppercase; }
+    .sobre-text { padding-right: 20px; }
+    .sobre-text .section-desc { max-width: 100%; margin-bottom: 24px; }
+
+
+    /* ─── SERVIÇOS ─── */
+    #servicos {
+      background: #7db8d8;
+    }
+    .servicos-header {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+    }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: rgba(15,26,34,.2);
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      border: 1px solid rgba(15,26,34,.1);
+    }
+    .servico-card {
+      background: #1e3a4a;
+      padding: 30px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+      cursor: default;
+    }
+    .servico-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .servico-card:hover { background: #163040; }
+    .servico-card:hover::after { transform: scaleX(1); }
+    .servico-icon { font-size: 2rem; margin-bottom: 16px; }
+    .servico-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f0f8ff;
+      margin-bottom: 8px;
+    }
+    .servico-name-es {
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a8c8d8;
+      margin-bottom: 16px;
+    }
+    .servico-price {
+      font-size: .8rem;
+      color: #fbc900;
+      font-weight: 700;
+    }
+    .servicos-note {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fbc900;
+      border: 1px solid #e6b700;
+      border-radius: 999px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: .9rem;
+      color: #000000;
+      line-height: 1.6;
+    }
+    .servicos-note .note-icon { font-size: 1.6rem; flex-shrink: 0; }
+
+    /* ─── LOCALIZAÇÃO ─── */
+    #localizacao {
+      background: #c8e4f2;
+    }
+    .localizacao-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .loja-card {
+      background: #bee0f0;
+      border: 1px solid rgba(15,26,34,.1);
+      border-radius: 24px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .loja-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    .loja-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--yellow));
+    }
+    .loja-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(15,26,34,.1);
+      line-height: 1;
+      position: absolute;
+      top: 20px; right: 24px;
+    }
+    .loja-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .loja-neighborhood {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #fbc900;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .loja-address {
+      font-size: .9rem;
+      color: #000000;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .loja-address::before { content: '📍'; font-size: .85rem; flex-shrink: 0; margin-top: 2px; }
+    .loja-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25d366;
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      transition: all .25s;
+    }
+    .loja-whatsapp:hover { background: #1ebe5a; transform: translateY(-1px); }
+    .whatsapp-icon { font-size: 1rem; }
+
+    /* ─── AGENDAMENTO ─── */
+    #agendamento {
+      background: var(--blue);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #agendamento::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(15,26,34,.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .agendamento-inner {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .agendamento-deco {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 900;
+      color: rgba(15,26,34,.06);
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+    .agendamento-inner .section-title { margin-bottom: 16px; }
+    .agendamento-inner .section-desc { margin: 0 auto 48px; text-align: center; }
+    .whatsapp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .wa-card {
+      background: #bee0f0;
+      border: 1px solid rgba(15,26,34,.1);
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: left;
+      transition: border-color .25s;
+    }
+    .wa-card:hover { border-color: #25d366; }
+    .wa-card-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .wa-card-addr {
+      font-size: .75rem;
+      color: #1e3245;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #25d366;
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 9px 16px;
+      border-radius: 2px;
+      transition: background .2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .wa-btn:hover { background: #1ebe5a; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: linear-gradient(135deg, var(--blue) 0%, #6aaac8 100%);
+      color: var(--dark);
+      padding: 60px 5vw 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto 48px;
+    }
+    .footer-logo { margin-bottom: 16px; }
+    .footer-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+    .footer-logo-sub {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .6;
+      margin-bottom: 16px;
+    }
+    .footer-tagline {
+      font-size: .85rem;
+      line-height: 1.65;
+      opacity: .75;
+      max-width: 220px;
+    }
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      opacity: .6;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: var(--dark);
+      text-decoration: none;
+      font-size: .88rem;
+      opacity: .8;
+      transition: opacity .2s;
+    }
+    .footer-col ul li a:hover { opacity: 1; }
+    .footer-addresses { font-size: .82rem; line-height: 1.9; opacity: .75; }
+    .footer-addresses strong { opacity: 1; font-weight: 600; display: block; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; margin-top: 12px; }
+    .footer-addresses strong:first-child { margin-top: 0; }
+    .social-links {
+      display: flex; gap: 10px; margin-top: 20px;
+    }
+    .social-link {
+      width: 36px; height: 36px;
+      background: rgba(15,26,34,.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background .2s;
+    }
+    .social-link:hover { background: rgba(15,26,34,.3); }
+    .footer-bottom {
+      border-top: 1px solid rgba(15,26,34,.15);
+      padding-top: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .75rem;
+      opacity: .6;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: .5; }
+      50%       { opacity: 1; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 100px; left: 0; right: 0;
+        background: #0f1a22;
+        padding: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,.4);
+        gap: 4px;
+      }
+      nav.open a { color: #f8f4ef; padding: 12px 16px; display: block; }
+      nav.open .nav-cta { color: var(--dark) !important; }
+      .hamburger { display: flex; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+      .sobre-text { padding-right: 0; }
+      .sobre-img-wrap { order: -1; }
+      .sobre-grid-imgs { grid-template-columns: 1fr !important; }
+      .sobre-img-badge { right: 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .servicos-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .servicos-header { flex-direction: column; align-items: flex-start; }
+      .whatsapp-grid { grid-template-columns: 1fr; }
+      .delivery-banner img { width: 140px !important; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 72px 6vw; }
+      header { padding: 0 6vw; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .servicos-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .hero-btns { flex-direction: column; align-items: center; }
+    }
+
+    .loja-maps {
+      background: #1a73e8 !important;
+    }
+    .loja-maps:hover { background: #1558b0 !important; }
+
+
+    /* ─── LOJA CARDS ATUALIZADOS ─── */
+    .loja-meta {
+      margin: 10px 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .loja-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: .78rem;
+      color: #3a5a70;
+      line-height: 1.4;
+    }
+    .loja-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .loja-btn-wpp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: #25d366;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: .82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .loja-btn-wpp:hover { background: #1cb356; transform: translateY(-2px); }
+    .loja-btn-maps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: #e8f3f9;
+      color: #0a4a6e;
+      border: 1px solid #b8d9ec;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: .82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .loja-btn-maps:hover { background: #d0eaf6; transform: translateY(-2px); }
+
+
+    /* ─── SERVIÇOS BADGES ─── */
+    .servicos-badges {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid rgba(143,192,220,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .servico-row { display: contents; }
+    .servico-badge {
+      background: #1a2e3d;
+      color: #fff;
+      border: none;
+      border-right: 1px solid rgba(143,192,220,0.2);
+      border-bottom: 1px solid rgba(143,192,220,0.2);
+      padding: 22px 20px 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: background .2s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0;
+      line-height: 1.3;
+      min-height: 140px;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    .servico-badge:nth-child(5n) { border-right: none; }
+    .servico-badge:hover { background: #243d50; }
+    .badge-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+    }
+    .badge-desc {
+      font-size: .72rem;
+      font-weight: 600;
+      color: #8fc0dc;
+      letter-spacing: .07em;
+      opacity: 1;
+      text-transform: uppercase;
+      margin-bottom: auto;
+    }
+    .badge-cta {
+      font-size: .8rem;
+      font-weight: 700;
+      color: #fbc900;
+      letter-spacing: .02em;
+      margin-top: 16px;
+    }
+    @media (max-width: 900px) {
+      .servicos-badges { grid-template-columns: repeat(3, 1fr); border-radius: 12px; }
+      .servico-badge:nth-child(5n) { border-right: 1px solid rgba(143,192,220,0.2); }
+      .servico-badge:nth-child(3n) { border-right: none; }
+    }
+    @media (max-width: 560px) {
+      .servicos-badges { grid-template-columns: repeat(2, 1fr); }
+      .servico-badge:nth-child(3n) { border-right: 1px solid rgba(143,192,220,0.2); }
+      .servico-badge:nth-child(2n) { border-right: none; }
+      .badge-name { font-size: 1rem; }
+    }
+
+
+    /* ─── MODAL DE SERVIÇOS ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,26,36,.75);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 24px;
+      max-width: 520px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.3);
+      animation: modalIn .25s ease;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform: scale(.92) translateY(20px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+    .modal-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-body { padding: 24px 28px 28px; }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0a4a6e;
+      margin-bottom: 10px;
+    }
+    .modal-desc {
+      color: #3a5a70;
+      font-size: .92rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .modal-btn-wpp {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: #25d366; color: #fff;
+      border: none; border-radius: 999px;
+      padding: 12px 20px; font-size: .88rem; font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: background .2s;
+    }
+    .modal-btn-wpp:hover { background: #1cb356; }
+    .modal-btn-close {
+      flex: 1;
+      background: #e8f3f9; color: #0a4a6e;
+      border: 1.5px solid #8fc0dc; border-radius: 999px;
+      padding: 12px 20px; font-size: .88rem; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+    }
+    .modal-btn-close:hover { background: #d0eaf6; }
+    @media (max-width: 480px) {
+      .modal-img { height: 180px; }
+      .modal-body { padding: 18px 18px 22px; }
+      .modal-actions { flex-direction: column; }
+    }
+
+
+    /* ─── AVALIAÇÕES ─── */
+    #avaliacoes { background: #0f6db7; padding-bottom: 72px; }
+    .avaliacoes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .avaliacao-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(10,74,110,.07);
+      border: 1px solid #e0eef6;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform .2s, box-shadow .2s;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .avaliacao-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(10,74,110,.13);
+    }
+    .aval-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .aval-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: #1e3a4a;
+      color: #fff;
+      font-weight: 700;
+      font-size: .9rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .aval-nome {
+      font-weight: 700;
+      font-size: .92rem;
+      color: #0a4a6e;
+    }
+    .aval-item {
+      font-size: .75rem;
+      color: #8fc0dc;
+      margin-top: 2px;
+    }
+    .aval-header > span { margin-left: auto; }
+    .aval-texto {
+      font-size: .88rem;
+      color: #3a5a70;
+      line-height: 1.7;
+      font-style: italic;
+    }
+    @media (max-width: 600px) {
+      .avaliacoes-grid { grid-template-columns: 1fr; }
+    }
+
+
+    /* ─── CARROSSEL AVALIAÇÕES ─── */
+    .aval-carousel {
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 8px;
+    }
+    .aval-track {
+      display: flex;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+    }
+    .aval-slide {
+      min-width: 100%;
+      padding: 4px 8px 12px;
+      box-sizing: border-box;
+    }
+    .aval-slide .avaliacao-card {
+      margin: 0 auto;
+      max-width: 640px;
+      overflow: hidden;
+    }
+    .aval-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .aval-btn {
+      background: #1e3a4a;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 38px; height: 38px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .15s;
+      flex-shrink: 0;
+    }
+    .aval-btn:hover { background: #8fc0dc; transform: scale(1.1); }
+    .aval-dots { display: flex; gap: 8px; }
+    .aval-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #c8dde9;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      border: none;
+    }
+    .aval-dot.active { background: #1e3a4a; transform: scale(1.3); }
+
+
+    .servico-badge.active {
+      background: #8fc0dc !important;
+      color: #fff;
+    }
+    .servico-badge.active .badge-desc { color: #fff !important; }
+    .servico-badge.active .badge-cta { color: #1a2e3d !important; }
+
+    .servicos-header .section-title,
+    .servicos-header .section-label {
+      text-align: center !important;
+      display: block;
+    }
+    /* ─── LANG CONTENT ─── */
+    [data-lang="es"] { display: none !important; }
+    html[lang="es"] [data-lang="es"] { display: revert !important; }
+    html[lang="es"] [data-lang="pt"] { display: none !important; }
+
+    /* ─── DELIVERY BANNER ─── */
+    .delivery-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #1e3a4a;
+      border-left: 4px solid #fbc900;
+      color: #ffffff;
+      font-size: .95rem;
+      font-weight: 500;
+      padding: 16px 28px;
+      border-radius: 24px;
+      max-width: 1100px;
+      margin: 0 auto 32px;
+    }
+    .delivery-banner strong { color: #fbc900; }
+    .delivery-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+    @media (max-width: 600px) {
+      .sobre-grid-imgs { grid-template-columns: 1fr !important; }
+      .sobre-grid-imgs .sobre-img-wrap img { max-height: 260px; }
+      .delivery-banner img { width: 110px !important; }
+      .delivery-banner div p { font-size: .95rem !important; }
+      .delivery-banner div p strong { font-size: 1.05rem !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('pt')" id="btn-pt">PT</button>
+    <span class="lang-divider"> | </span>
+    <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    
+    <nav id="main-nav">
+      <a href="#sobre" data-lang="pt">Sobre</a>
+      <a href="#sobre" data-lang="es">Nosotros</a>
+      <a href="#servicos" data-lang="pt">Serviços</a>
+      <a href="#servicos" data-lang="es">Servicios</a>
+      <a href="#localizacao" data-lang="pt">Lojas</a>
+      <a href="#localizacao" data-lang="es">Tiendas</a>
+      <a href="#localizacao" class="nav-cta" data-lang="pt">Agendar</a>
+      <a href="#localizacao" class="nav-cta" data-lang="es">Reservar</a>
+    </nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="data:image/png;base64,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" alt="Lavanderia Lavação" style="height:80px;width:auto;margin-bottom:24px;display:block;margin-left:auto;margin-right:auto;" />
+      <div class="hero-badge" data-lang="es">Lavandería LAVAÇÃO</div>
+
+      <h1 class="hero-title" data-lang="pt">
+        Você merece<br><em style="color:#fbc900;font-style:normal;">tempo livre!</em>
+      </h1>
+      <h1 class="hero-title" data-lang="es">
+        Mereces<br><em style="color:#fbc900;font-style:normal;">¡tiempo libre!</em>
+      </h1>
+
+<p class="hero-desc" data-lang="pt">
+        Da roupa do dia a dia ao vestido de festa especial — tratamos cada peça com atenção, expertise e o carinho de quem entende o valor do que você usa.
+      </p>
+      <p class="hero-desc" data-lang="es">
+        Desde la ropa del día a día hasta el vestido de fiesta especial — tratamos cada prenda con atención, experiencia y el cariño de quienes comprenden el valor de lo que usas.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#localizacao" class="btn-primary" data-lang="pt">📲 Contato pelo WhatsApp</a>
+        <a href="#localizacao" class="btn-primary" data-lang="es">📲 Reservar por WhatsApp</a>
+        <a href="#servicos" class="btn-outline" data-lang="pt">Ver Serviços</a>
+        <a href="#servicos" class="btn-outline" data-lang="es">Ver Servicios</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- UNIDADES + SOBRE -->
+  <section id="localizacao" style="padding-bottom:0;background:#7db8d8;">
+
+    <div style="max-width:1100px;margin:0 auto 32px;">
+      <p class="section-label" data-lang="pt">Onde estamos</p>
+      <p class="section-label" data-lang="es">Dónde estamos</p>
+      <h2 class="section-title" data-lang="pt">Nossas <em>Unidades</em></h2>
+      <h2 class="section-title" data-lang="es">Nuestras <em>Unidades</em></h2>
+    </div>
+    <div class="localizacao-grid">
+      <div class="loja-card">
+        <div class="loja-num">01</div>
+        <div class="loja-name">Trindade</div>
+        <div class="loja-neighborhood" data-lang="pt">Bairro Trindade</div>
+        <div class="loja-neighborhood" data-lang="es">Barrio Trindade</div>
+        <div class="loja-address">Rua Des. Vítor Lima, 260 — Trindade, Florianópolis</div>
+
+        <div class="loja-meta">
+          <div class="loja-meta-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><span>(48) 3238-5501</span></div>
+          <div class="loja-meta-row" data-lang="pt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Seg–Sex: 09h–12h e 13h–18h · Sáb: 08h–12h</span></div>
+          <div class="loja-meta-row" data-lang="es"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Lun–Vie: 09h–12h y 13h–18h · Sáb: 08h–12h</span></div>
+        </div>
+
+        <div class="loja-btns">
+          <a class="loja-btn-wpp" href="https://wa.me/554832385501" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+            <span data-lang="pt">Contato pelo WhatsApp</span>
+            <span data-lang="es">Contacto por WhatsApp</span>
+          </a>
+          <a class="loja-btn-maps" href="https://maps.app.goo.gl/4dohmzJ4eXGHjrkk9" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-lang="pt">Ver no Maps</span>
+            <span data-lang="es">Ver en Maps</span>
+          </a>
+        </div>
+      </div>
+      <div class="loja-card">
+        <div class="loja-num">02</div>
+        <div class="loja-name">Centro</div>
+        <div class="loja-neighborhood" data-lang="pt">Centro — Armínio Tavares</div>
+        <div class="loja-neighborhood" data-lang="es">Centro — Armínio Tavares</div>
+        <div class="loja-address">Rua Dr. Armínio Tavares, 60 — Centro, Florianópolis</div>
+
+        <div class="loja-meta">
+          <div class="loja-meta-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><span>(48) 9113-5400</span></div>
+          <div class="loja-meta-row" data-lang="pt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Seg–Sex: 09h–12h e 13h–18h · Sáb: 08h–12h</span></div>
+          <div class="loja-meta-row" data-lang="es"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Lun–Vie: 09h–12h y 13h–18h · Sáb: 08h–12h</span></div>
+        </div>
+
+        <div class="loja-btns">
+          <a class="loja-btn-wpp" href="https://wa.me/554891135400" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+            <span data-lang="pt">Contato pelo WhatsApp</span>
+            <span data-lang="es">Contacto por WhatsApp</span>
+          </a>
+          <a class="loja-btn-maps" href="https://maps.app.goo.gl/nJgPBoLKPD9YKnmM6" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-lang="pt">Ver no Maps</span>
+            <span data-lang="es">Ver en Maps</span>
+          </a>
+        </div>
+      </div>
+      <div class="loja-card">
+        <div class="loja-num">03</div>
+        <div class="loja-name">Mauro Ramos</div>
+        <div class="loja-neighborhood" data-lang="pt">Bairro Mauro Ramos</div>
+        <div class="loja-neighborhood" data-lang="es">Barrio Mauro Ramos</div>
+        <div class="loja-address">Av. Mauro Ramos, 413 — Mauro Ramos, Florianópolis</div>
+
+        <div class="loja-meta">
+          <div class="loja-meta-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><span>(48) 9113-5400</span></div>
+          <div class="loja-meta-row" data-lang="pt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Seg–Sex: 09h–19h · Sáb: 08h–12h</span></div>
+          <div class="loja-meta-row" data-lang="es"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Lun–Vie: 09h–19h · Sáb: 08h–12h</span></div>
+        </div>
+
+        <div class="loja-btns">
+          <a class="loja-btn-wpp" href="https://wa.me/554891135400" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+            <span data-lang="pt">Contato pelo WhatsApp</span>
+            <span data-lang="es">Contacto por WhatsApp</span>
+          </a>
+          <a class="loja-btn-maps" href="https://share.google/S66FWmVpS4YccVsJ9" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-lang="pt">Ver no Maps</span>
+            <span data-lang="es">Ver en Maps</span>
+          </a>
+        </div>
+      </div>
+      <div class="loja-card">
+        <div class="loja-num">04</div>
+        <div class="loja-name">Jurerê</div>
+        <div class="loja-neighborhood" data-lang="pt">Bairro Jurerê</div>
+        <div class="loja-neighborhood" data-lang="es">Barrio Jurerê</div>
+        <div class="loja-address">Rua Prof. Renato Barbosa, 258 — Jurerê, Florianópolis</div>
+
+        <div class="loja-meta">
+          <div class="loja-meta-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><span>(48) 9142-0129</span></div>
+          <div class="loja-meta-row" data-lang="pt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Seg–Sex: 08h–12h e 13h–17h · Sáb: 08h–12h</span></div>
+          <div class="loja-meta-row" data-lang="es"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Lun–Vie: 08h–12h y 13h–17h · Sáb: 08h–12h</span></div>
+        </div>
+
+        <div class="loja-btns">
+          <a class="loja-btn-wpp" href="https://wa.me/554891420129" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+            <span data-lang="pt">Contato pelo WhatsApp</span>
+            <span data-lang="es">Contacto por WhatsApp</span>
+          </a>
+          <a class="loja-btn-maps" href="https://maps.app.goo.gl/7YR7kMUTuYa4UqhW9" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-lang="pt">Ver no Maps</span>
+            <span data-lang="es">Ver en Maps</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VÍDEOS DAS LOJAS -->
+    <div style="max-width:1100px;margin:40px auto 0;padding:0 5vw 56px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <div style="text-align:center;">
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#0f1a22;margin-bottom:12px;" data-lang="pt">Loja Trindade</p>
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#0f1a22;margin-bottom:12px;" data-lang="es">Tienda Trindade</p>
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.15);">
+            <iframe src="https://www.youtube.com/embed/ZaxAjQBy0W8?si=VYwhB_27DnY9wjYy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
+          </div>
+        </div>
+
+        <div style="text-align:center;">
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#0f1a22;margin-bottom:12px;" data-lang="pt">Lojas Centro</p>
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#0f1a22;margin-bottom:12px;" data-lang="es">Tiendas Centro</p>
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.15);">
+            <iframe src="https://www.youtube.com/embed/_NB328LuLXc?si=i13RZUV7ETOoFZhN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
+          </div>
+        </div>
+
+        <div style="text-align:center;">
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#0f1a22;margin-bottom:12px;" data-lang="pt">Loja Jurerê</p>
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#0f1a22;margin-bottom:12px;" data-lang="es">Tienda Jurerê</p>
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.15);">
+            <iframe src="https://www.youtube.com/embed/eEWwmMa_vkI?si=I7G99i1_kTwRxMNE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Responsivo mobile: 1 coluna -->
+      <style>
+        @media (max-width: 700px) {
+          #videos-lojas-grid { grid-template-columns: 1fr !important; }
+        }
+      </style>
+    </div>
+    </section>
+
+  <div style="max-width:1100px;margin:0 auto;border-top:1px solid #d0e8f3;"></div>
+  <section id="sobre" style="padding-top:48px;padding-bottom:56px;">
+
+    <div class="sobre-grid sobre-grid-imgs" style="grid-template-columns:1fr;max-width:800px;margin:0 auto;">
+      <div class="sobre-text">
+        <p class="section-label" data-lang="pt">Sobre Nós</p>
+        <p class="section-label" data-lang="es">Nosotros</p>
+        <h2 class="section-title" data-lang="pt">
+          Nascemos em <em>Florianópolis</em>, crescemos com você
+        </h2>
+        <h2 class="section-title" data-lang="es">
+          Nacimos en <em>Florianópolis</em>, crecimos contigo
+        </h2>
+        <p class="section-desc" data-lang="pt">
+          A Lavanderia Lavação nasceu do sonho de oferecer um serviço de lavanderia de alto padrão à bela Florianópolis. Com raízes florianopolitanas e uma equipe apaixonada pelo que faz, crescemos de uma pequena loja para quatro unidades espalhadas pela cidade — sempre mantendo a mesma essência: <strong style="color:#0a4a6e;font-weight:700;">qualidade, confiança e acolhimento.</strong>
+        </p>
+        <p class="section-desc" data-lang="es">
+          La Lavandería Lavação nació del sueño de ofrecer un servicio de lavandería de alto nivel en la hermosa Florianópolis. Con raíces florianopolitanas y un equipo apasionado por lo que hace, crecimos de una pequeña tienda a cuatro unidades distribuidas por la ciudad — siempre manteniendo la misma esencia: <strong style="color:#0a4a6e;font-weight:700;">calidad, confianza y acogida.</strong>
+        </p>
+      </div>
+      </div>
+    <div style="max-width:1100px;margin:40px auto 0;padding:0 5vw 56px;text-align:center;">
+      <a href="#servicos" data-lang="pt" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:#0f2030;color:#e8f4fb;border-radius:999px;padding:14px 36px;font-size:.95rem;font-weight:700;letter-spacing:.02em;">Ver Serviços →</a>
+      <a href="#servicos" data-lang="es" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:#0f2030;color:#e8f4fb;border-radius:999px;padding:14px 36px;font-size:.95rem;font-weight:700;letter-spacing:.02em;">Ver Servicios →</a>
+    </div>
+    </section>
+
+  <!-- AVALIAÇÕES -->
+  <section id="avaliacoes">
+    <div style="max-width:1100px;margin:0 auto 40px;">
+      <p class="section-label" data-lang="pt">O que dizem sobre nós</p>
+      <p class="section-label" data-lang="es">Lo que dicen sobre nosotros</p>
+      <h2 class="section-title" data-lang="pt">Avaliações dos <em style="color:#fbc900;">nossos clientes</em></h2>
+      <h2 class="section-title" data-lang="es">Opiniones de <em style="color:#fbc900;">nuestros clientes</em></h2>
+    </div>
+    
+   <!-- Elfsight Google Reviews | Avaliações Lavanderia Lavação --> <script src="https://elfsightcdn.com/platform.js" async></script> <div class="elfsight-app-b18d1b64-85ce-4727-9b43-5fa535e7fe53" data-elfsight-app-lazy></div>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="servicos-header" style="text-align:center;">
+      <div style="text-align:center;width:100%;">
+        <p class="section-label" data-lang="pt">O que fazemos</p>
+        <p class="section-label" data-lang="es">Lo que hacemos</p>
+        <h2 class="section-title" data-lang="pt">Nossos <em>Serviços</em></h2>
+        <h2 class="section-title" data-lang="es">Nuestros <em>Servicios</em></h2>
+      </div>
+
+    </div>
+
+
+    <div class="delivery-banner" style="align-items:center;">
+      <div style="display:flex;align-items:center;gap:14px;padding:24px 28px;flex:1;">
+        <span class="delivery-icon" style="font-size:2rem;flex-shrink:0;">🚐</span>
+        <div>
+          <p data-lang="pt" style="font-size:1.1rem;line-height:1.6;"><strong style="font-size:1.25rem;display:block;margin-bottom:4px;">Fazemos Delivery</strong>Buscamos e entregamos na sua casa!</p>
+          <p data-lang="es" style="font-size:1.1rem;line-height:1.6;"><strong style="font-size:1.25rem;display:block;margin-bottom:4px;">Hacemos Delivery</strong>Recogemos y entregamos en tu domicilio.</p>
+        </div>
+      </div>
+    </div>
+
+            <!-- GRID PT -->
+    <div class="servicos-badges" data-lang="pt">
+      <a href="cortinas.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Cortinas</span><span class="badge-desc">CORTINAS / PERSIANAS</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="tapetes.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Tapetes</span><span class="badge-desc">TODOS OS TIPOS E TAMANHOS</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="persianas.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Persianas</span><span class="badge-desc">LIMPEZA ESPECIALIZADA</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="edredons.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Edredons</span><span class="badge-desc">COBERTORES E TRAVESSEIROS</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="roupas.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Roupas do dia a dia</span><span class="badge-desc">LAVAGEM E PASSAGEM</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="vestidos.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Vestidos de Festa</span><span class="badge-desc">LIMPEZA DELICADA</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="ternos.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Ternos</span><span class="badge-desc">A SECO PROFISSIONAL</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="casacos.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Casacos</span><span class="badge-desc">TODAS AS FIBRAS</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="couro.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Couro</span><span class="badge-desc">HIGIENIZAÇÃO E HIDRATAÇÃO</span><span class="badge-cta">Ver mais →</span></a>
+      <a href="tingimento.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Tingimento</span><span class="badge-desc">RENOVAÇÃO DE CORES</span><span class="badge-cta">Ver mais →</span></a>
+    </div>
+    <!-- GRID ES -->
+    <div class="servicos-badges" data-lang="es">
+      <a href="cortinas.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Cortinas</span><span class="badge-desc">CORTINAS / PERSIANAS</span><span class="badge-cta">Ver más →</span></a>
+      <a href="tapetes.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Alfombras</span><span class="badge-desc">TODOS LOS TIPOS Y TAMAÑOS</span><span class="badge-cta">Ver más →</span></a>
+      <a href="persianas.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Persianas</span><span class="badge-desc">LIMPIEZA ESPECIALIZADA</span><span class="badge-cta">Ver más →</span></a>
+      <a href="edredons.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Edredones</span><span class="badge-desc">COBERTORES Y ALMOHADAS</span><span class="badge-cta">Ver más →</span></a>
+      <a href="roupas.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Ropa del día a día</span><span class="badge-desc">LAVADO Y PLANCHADO</span><span class="badge-cta">Ver más →</span></a>
+      <a href="vestidos.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Vestidos de fiesta</span><span class="badge-desc">LIMPIEZA DELICADA</span><span class="badge-cta">Ver más →</span></a>
+      <a href="ternos.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Trajes</span><span class="badge-desc">A SECO PROFESIONAL</span><span class="badge-cta">Ver más →</span></a>
+      <a href="casacos.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Abrigos</span><span class="badge-desc">TODAS LAS FIBRAS</span><span class="badge-cta">Ver más →</span></a>
+      <a href="couro.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Cuero</span><span class="badge-desc">HIGIENIZACIÓN E HIDRATACIÓN</span><span class="badge-cta">Ver más →</span></a>
+      <a href="tingimento.html" class="servico-badge" style="text-decoration:none;color:inherit;"><span class="badge-name">Teñido</span><span class="badge-desc">RENOVACIÓN DE COLORES</span><span class="badge-cta">Ver más →</span></a>
+    </div>
+    </div>
+    <!-- PAINEL INLINE SERVIÇO -->
+    <div id="servicoPainel" style="display:none;max-width:1100px;margin:20px auto 0;background:#1a2e3d;border-radius:20px;overflow:hidden;animation:painelIn .3s ease;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;min-height:280px;">
+        <div style="position:relative;overflow:hidden;">
+          <img id="painelImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          <div id="painelVideoWrap" style="display:none;position:relative;width:100%;padding-bottom:56.25%;background:#000;">
+            <iframe id="painelVideo" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+          </div>
+        </div>
+        <div style="padding:32px 36px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div id="painelTitle" style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:12px;"></div>
+            <div id="painelDesc" style="font-size:.92rem;color:#8fc0dc;line-height:1.75;"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;">
+            <a id="painelWpp" href="#localizacao" onclick="closePainel()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#25d366;color:#fff;border-radius:999px;padding:12px 20px;font-size:.88rem;font-weight:700;text-decoration:none;min-width:160px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+              <span data-lang="pt">Solicitar este serviço</span>
+              <span data-lang="es">Solicitar este servicio</span>
+            </a>
+            <button onclick="closePainel()" style="flex:1;background:rgba(143,192,220,0.12);border:1px solid rgba(143,192,220,0.3);color:#8fc0dc;border-radius:999px;padding:12px 20px;font-size:.88rem;font-weight:600;cursor:pointer;min-width:100px;">
+              <span data-lang="pt">Fechar</span>
+              <span data-lang="es">Cerrar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      @keyframes painelIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+      @media (max-width:700px) {
+        #servicoPainel > div { grid-template-columns: 1fr !important; }
+        #servicoPainel > div > div:first-child { min-height: 200px; }
+      }
+    </style>
+
+
+    <div style="max-width:900px;margin:40px auto 0;">
+      <div data-lang="pt" style="background:#fbc900;color:#0a1a2a;border-radius:20px;padding:16px 24px;display:flex;align-items:center;gap:12px;font-size:.88rem;line-height:1.6;font-weight:500;box-shadow:0 4px 14px rgba(251,201,0,.25);">
+        <span style="font-size:1.3rem;flex-shrink:0;">💬</span>
+        <span><strong>Os valores variam conforme o tamanho, material e tipo do serviço.</strong> Entre em contato com a unidade mais próxima para um orçamento personalizado.</span>
+      </div>
+      <div data-lang="es" style="background:#fbc900;color:#0a1a2a;border-radius:20px;padding:16px 24px;display:flex;align-items:center;gap:12px;font-size:.88rem;line-height:1.6;font-weight:500;box-shadow:0 4px 14px rgba(251,201,0,.25);">
+        <span style="font-size:1.3rem;flex-shrink:0;">💬</span>
+        <span><strong>Los valores varían según el tamaño, material y tipo de servicio.</strong> Contáctenos con la unidad más cercana para un presupuesto personalizado.</span>
+      </div>
+    </div>
+
+  
+    <div style="max-width:1100px;margin:32px auto 0;padding:0 5vw 48px;text-align:center;">
+      <a href="#localizacao" class="btn-primary" data-lang="pt" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fbc900;color:#0a1a2a;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+        Contato pelo WhatsApp
+      </a>
+      <a href="#localizacao" class="btn-primary" data-lang="es" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fbc900;color:#0a1a2a;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+        Contacto por WhatsApp
+      </a>
+    </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-text">Lavação</div>
+          <div class="footer-logo-sub" data-lang="pt">Lavanderia · Florianópolis</div>
+          <div class="footer-logo-sub" data-lang="es">Lavandería · Florianópolis</div>
+        </div>
+        <p class="footer-tagline" data-lang="pt">
+          Cuidado e tradição em cada peça. Quatro unidades em Florianópolis à sua disposição.
+        </p>
+        <p class="footer-tagline" data-lang="es">
+          Cuidado y tradición en cada prenda. Cuatro unidades en Florianópolis a tu disposición.
+        </p>
+        <div class="social-links">
+          <a class="social-link" href="https://www.instagram.com/lavanderialavacao/" target="_blank" rel="noopener" title="Instagram" style="width:40px;height:40px;background:rgba(15,26,34,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f1a22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#0f1a22" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="pt">Navegação</h4>
+        <h4 data-lang="es">Navegación</h4>
+        <ul>
+          <li><a href="#sobre" data-lang="pt">Sobre Nós</a><a href="#sobre" data-lang="es">Nosotros</a></li>
+          <li><a href="#servicos" data-lang="pt">Serviços</a><a href="#servicos" data-lang="es">Servicios</a></li>
+          <li><a href="#localizacao" data-lang="pt">Nossas Lojas</a><a href="#localizacao" data-lang="es">Nuestras Tiendas</a></li>
+          <li><a href="#localizacao" data-lang="pt">Agendamento</a><a href="#localizacao" data-lang="es">Reservas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="pt">Serviços</h4>
+        <h4 data-lang="es">Servicios</h4>
+        <ul>
+          <li><a href="#servicos" data-lang="pt">Cortinas & Persianas</a><a href="#servicos" data-lang="es">Cortinas & Persianas</a></li>
+          <li><a href="tapetes.html" data-lang="pt">Tapetes</a><a href="tapetes.html" data-lang="es">Alfombras</a></li>
+          <li><a href="roupas.html" data-lang="pt">Roupas do dia a dia</a><a href="roupas.html" data-lang="es">Ropa cotidiana</a></li>
+          <li><a href="#servicos" data-lang="pt">Vestidos & Ternos</a><a href="#servicos" data-lang="es">Vestidos & Trajes</a></li>
+          <li><a href="#servicos" data-lang="pt">Couro & Tingimento</a><a href="#servicos" data-lang="es">Cuero & Teñido</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="pt">Endereços</h4>
+        <h4 data-lang="es">Direcciones</h4>
+        <div class="footer-addresses">
+          <strong>Trindade</strong>
+          Rua Des. Vítor Lima, 260
+          <strong>Centro</strong>
+          Rua Dr. Armínio Tavares, 60
+          <strong>Mauro Ramos</strong>
+          Av. Mauro Ramos, 413
+          <strong>Jurerê</strong>
+          Rua Prof. Renato Barbosa, 258
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Lavanderia Lavação — Florianópolis, SC</span>
+      <a href="https://www.instagram.com/lavanderialavacao/" target="_blank" rel="noopener" style="color:var(--dark);text-decoration:none;">@lavanderialavacao</a>
+    </div>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    }
+
+    function toggleMenu() {
+      document.getElementById('main-nav').classList.toggle('open');
+    }
+
+    // Close menu on link click
+    document.querySelectorAll('#main-nav a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('main-nav').classList.remove('open');
+      });
+    });
+
+    // Intersection observer for fade-in effect
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.servico-card, .loja-card, .wa-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease';
+      observer.observe(el);
+    });
+  </script>      </div>
+    </div>
+  </div>
+
+  <script>
+    var SERVICOS = [
+    {"pt": "Cortinas", "es": "Cortinas", "img": "https://images.unsplash.com/photo-1580331451062-99ff652288d7?w=800&q=80", "desc_pt": "Lavagem especializada de cortinas de todos os tecidos e tamanhos, com cuidado na remoção de poeira e manchas.", "desc_es": "Lavado especializado de cortinas de todos los tejidos y tamaños, con cuidado en la eliminación de polvo y manchas.", "video": "y7T7Fl46MwA"},
+    {"pt": "Tapetes", "es": "Alfombras", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", "desc_pt": "Higienização profunda de tapetes de todos os tamanhos e materiais, eliminando ácaros, sujeira e odores.", "desc_es": "Higienización profunda de alfombras de todos los tamaños y materiales, eliminando ácaros, suciedad y olores.", "video": "QVcPRPC1Lmg"},
+    {"pt": "Persianas", "es": "Persianas", "img": "https://images.unsplash.com/photo-1615874694520-474822394e73?w=800&q=80", "desc_pt": "Limpeza detalhada de persianas de tecido, plástico e alumínio, restaurando o visual e eliminando poeira.", "desc_es": "Limpieza detallada de persianas de tela, plástico y aluminio, restaurando el aspecto y eliminando el polvo.", "video": "pQQspZyxc-w"},
+    {"pt": "Edredons", "es": "Edredones", "img": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80", "desc_pt": "Lavagem de edredons, duvets e cobertores com processo especial que preserva o enchimento e elimina ácaros.", "desc_es": "Lavado de edredones y mantas con proceso especial que preserva el relleno y elimina los ácaros.", "video": "pLL_gry6mKg"},
+    {"pt": "Roupas do dia a dia", "es": "Ropa del día a día", "img": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&q=80", "desc_pt": "Lavagem, secagem e passadoria das suas peças do cotidiano com cuidado e agilidade.", "desc_es": "Lavado, secado y planchado de sus prendas cotidianas con cuidado y agilidad.", "video": "qAUxiBFAv_g"},
+    {"pt": "Vestidos de Festa", "es": "Vestidos de fiesta", "img": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80", "desc_pt": "Tratamento delicado para vestidos de festa, noiva e formatura — preservando bordados, rendas e tecidos nobres.", "desc_es": "Tratamiento delicado para vestidos de fiesta, novia y graduación — preservando bordados, encajes y telas nobles.", "video": "KQ7033OqBQw"},
+    {"pt": "Ternos", "es": "Trajes", "img": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80", "desc_pt": "Lavagem a seco e passadoria profissional de ternos, blazers e paletós para manter o corte e o caimento perfeito.", "desc_es": "Lavado en seco y planchado profesional de trajes, blazers y sacos para mantener el corte y caída perfectos.", "video":"gNJnb_htlgI"},
+    {"pt": "Casacos", "es": "Abrigos", "img": "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&q=80", "desc_pt": "Higienização e lavagem especializada de casacos de lã, pluma, sintético e outros materiais.", "desc_es": "Higienización y lavado especializado de abrigos de lana, pluma, sintético y otros materiales.", "video": "QlNZh_6ZMss"},
+    {"pt": "Couro", "es": "Cuero", "img": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80", "desc_pt": "Limpeza e hidratação de peças de couro e camurça, recuperando a maciez, brilho e cor originais.", "desc_es": "Limpieza e hidratación de prendas de cuero y gamuza, recuperando la suavidad, brillo y color originales.", "video": "QlNZh_6ZMss"},
+    {"pt": "Tingimento", "es": "Teñido", "img": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=80", "desc_pt": "Tingimento profissional de roupas e tecidos — renove a cor de peças desbotadas ou mude completamente o visual.", "desc_es": "Teñido profesional de ropa y telas — renueve el color de prendas desvanecidas o cambie completamente el look.", "video": "EZuw9BzGwbI"}
+  ];
+    var currentPainel = -1;
+
+    function openModal(idx) {
+      var s = SERVICOS[idx];
+      var lang = document.documentElement.lang === 'es' ? 'es' : 'pt';
+      var painel = document.getElementById('servicoPainel');
+      var img = document.getElementById('painelImg');
+      var videoWrap = document.getElementById('painelVideoWrap');
+      var iframe = document.getElementById('painelVideo');
+
+      if (s.video) {
+        img.style.display = 'none';
+        videoWrap.style.display = 'block';
+        iframe.src = 'https://www.youtube.com/embed/' + s.video + '?autoplay=1&rel=0';
+      } else {
+        videoWrap.style.display = 'none';
+        iframe.src = '';
+        img.style.display = 'block';
+        img.src = s.img;
+        img.alt = lang === 'pt' ? s.pt : s.es;
+      }
+
+      document.getElementById('painelTitle').textContent = lang === 'pt' ? s.pt : s.es;
+      document.getElementById('painelDesc').textContent = lang === 'pt' ? s.desc_pt : s.desc_es;
+
+      if (currentPainel === idx) { closePainel(); return; }
+      currentPainel = idx;
+
+      document.querySelectorAll('.servico-badge').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.servico-badge[onclick="openModal(' + idx + ')"]').forEach(function(b) { b.classList.add('active'); });
+
+      painel.style.display = 'block';
+      painel.style.animation = 'none';
+      requestAnimationFrame(function() { painel.style.animation = 'painelIn .3s ease'; });
+      setTimeout(function() { painel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    }
+
+    function closePainel() {
+      document.getElementById('servicoPainel').style.display = 'none';
+      document.querySelectorAll('.servico-badge').forEach(function(b) { b.classList.remove('active'); });
+      currentPainel = -1;
+    }
+  </script>
+
+  <script>
+    (function() {
+      var track = document.getElementById('avalTrack');
+      if (!track) return;
+      var slides = track.querySelectorAll('.aval-slide');
+      var total = slides.length;
+      var current = 0;
+      var timer;
+
+      // Criar dots
+      var dotsEl = document.getElementById('avalDots');
+      slides.forEach(function(_, i) {
+        var d = document.createElement('button');
+        d.className = 'aval-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Ir para avaliação ' + (i+1));
+        d.onclick = function() { goTo(i); resetTimer(); };
+        dotsEl.appendChild(d);
+      });
+
+      function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dotsEl.querySelectorAll('.aval-dot').forEach(function(d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      window.avalMove = function(dir) { goTo(current + dir); resetTimer(); };
+
+      function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(function() { goTo(current + 1); }, 5000);
+      }
+
+      // Swipe touch
+      var startX = 0;
+      track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { avalMove(diff > 0 ? 1 : -1); resetTimer(); }
+      }, {passive:true});
+
+      resetTimer();
+    })();
+  </script>
+
+</body>
+</html>

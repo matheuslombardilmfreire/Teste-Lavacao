@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lavagem de Casacos — Lavanderia Lavação · Florianópolis</title>
+  <meta name="description" content="Lavagem especializada de casacos em Florianópolis. Buscamos e entregamos na sua casa. 4 unidades: Trindade, Centro, Mauro Ramos e Jurerê." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #8fc0dc;
+      --blue-mid: #6aaac8;
+      --blue-dark: #1a2e3d;
+      --blue-deep: #0a4a6e;
+      --blue-brand: #0f6db7;
+      --yellow: #fbc900;
+      --dark: #0f1a22;
+      --bg: #0f6db7;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Jost', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ─── LANG BAR ─── */
+    .lang-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0;
+      background: linear-gradient(135deg, #8fc0dc 0%, #6aaac8 100%);
+      padding: 6px 24px;
+      border-bottom: 1px solid rgba(15,26,34,.1);
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 999px;
+      transition: all .25s;
+    }
+    .lang-btn.active { border-color: var(--yellow); color: var(--yellow); }
+    .lang-btn:hover:not(.active) { color: rgba(15,26,34,.6); }
+    .lang-divider { color: rgba(15,26,34,.4); font-size: .8rem; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 32px; left: 0; right: 0;
+      z-index: 999;
+      background: linear-gradient(135deg, var(--blue) 0%, #6aaac8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      box-shadow: 0 4px 40px rgba(0,0,0,.35);
+    }
+    .logo-link {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(15,26,34,.6);
+    }
+    nav { display: flex; gap: 2px; align-items: center; }
+    nav a {
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 2px;
+      transition: background .2s;
+    }
+    nav a:hover { background: rgba(0,0,0,.1); }
+    .nav-cta {
+      background: var(--yellow) !important;
+      color: var(--dark) !important;
+      margin-left: 8px;
+      font-weight: 600 !important;
+      border-radius: 999px !important;
+    }
+    .nav-cta:hover { background: #e6b700 !important; }
+
+    /* ─── MAIN SECTION ─── */
+    .main-section {
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 120px 5vw 60px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── HERO TOP AREA ─── */
+    .hero-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 28px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: .88rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 999px;
+      transition: all .25s;
+      margin-bottom: 22px;
+    }
+    .hero-cta:hover {
+      background: #e6b700;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(251,201,0,.4);
+    }
+
+    .hero-top h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1;
+      color: #0a1a2a;
+      margin-bottom: 14px;
+      letter-spacing: -.01em;
+    }
+
+    .hero-divider {
+      width: 50px;
+      height: 3px;
+      background: var(--yellow);
+      margin: 0 auto 14px;
+      border-radius: 2px;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,.85);
+      max-width: 600px;
+      margin: 0 auto 18px;
+    }
+
+    /* ─── "VER TRABALHO" LABEL ─── */
+    .ver-trabalho-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .ver-trabalho-label::before,
+    .ver-trabalho-label::after {
+      content: '';
+      flex: 0 0 30px;
+      height: 1px;
+      background: var(--yellow);
+      opacity: .6;
+    }
+
+    /* ─── VIDEOS STACK ─── */
+    .videos-stack {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      width: 100%;
+    }
+    .video-item {}
+    .video-label {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .video-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--yellow);
+      flex-shrink: 0;
+    }
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45);
+      background: #071830;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .video-separator {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: .18;
+    }
+    .video-separator::before,
+    .video-separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #fff;
+    }
+    .video-separator span {
+      font-size: .68rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: linear-gradient(135deg, var(--blue) 0%, #6aaac8 100%);
+      color: var(--dark);
+      padding: 48px 5vw 28px;
+      margin-top: 80px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+    .footer-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .footer-logo-sub {
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .6;
+      margin-bottom: 14px;
+    }
+    .footer-tagline { font-size: .82rem; line-height: 1.65; opacity: .75; max-width: 200px; }
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .6;
+      margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      color: var(--dark);
+      text-decoration: none;
+      font-size: .85rem;
+      opacity: .8;
+      transition: opacity .2s;
+    }
+    .footer-col ul li a:hover { opacity: 1; }
+    .footer-addresses { font-size: .78rem; line-height: 1.9; opacity: .75; }
+    .footer-addresses strong {
+      opacity: 1; font-weight: 600; display: block;
+      font-size: .65rem; letter-spacing: .1em;
+      text-transform: uppercase; margin-top: 10px;
+    }
+    .footer-addresses strong:first-child { margin-top: 0; }
+    .footer-bottom {
+      border-top: 1px solid rgba(15,26,34,.15);
+      padding-top: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .72rem;
+      opacity: .6;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-bottom a { color: var(--dark); text-decoration: none; }
+
+    /* ─── LANG ─── */
+    [data-lang="es"] { display: none !important; }
+    html[lang="es"] [data-lang="es"] { display: revert !important; }
+    html[lang="es"] [data-lang="pt"] { display: none !important; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-1 { animation: fadeUp .7s .05s ease both; }
+    .fade-2 { animation: fadeUp .7s .15s ease both; }
+    .fade-3 { animation: fadeUp .7s .25s ease both; }
+    .fade-4 { animation: fadeUp .7s .35s ease both; }
+    .fade-5 { animation: fadeUp .7s .45s ease both; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+    @media (max-width: 600px) {
+      nav { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .main-section { padding: 110px 5vw 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('pt')" id="btn-pt">PT</button>
+    <span class="lang-divider"> | </span>
+    <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo-link">
+      <div>
+        <div class="logo-text">Lavação</div>
+        <div class="logo-sub" data-lang="pt">Lavanderia · Florianópolis</div>
+        <div class="logo-sub" data-lang="es">Lavandería · Florianópolis</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html#sobre" data-lang="pt">Sobre</a>
+      <a href="index.html#sobre" data-lang="es">Nosotros</a>
+      <a href="index.html#servicos" data-lang="pt">Serviços</a>
+      <a href="index.html#servicos" data-lang="es">Servicios</a>
+      <a href="index.html#localizacao" data-lang="pt">Lojas</a>
+      <a href="index.html#localizacao" data-lang="es">Tiendas</a>
+      <a href="index.html#localizacao" class="nav-cta" data-lang="pt">Agendar</a>
+      <a href="index.html#localizacao" class="nav-cta" data-lang="es">Reservar</a>
+    </nav>
+  </header>
+
+  <!-- SEÇÃO ÚNICA -->
+  <section class="main-section">
+
+    <!-- TOPO: título + desc + CTA -->
+    <div class="hero-top">
+
+      <h1 class="fade-1" data-lang="pt">Casacos</h1>
+      <h1 class="fade-1" data-lang="es">Abrigos</h1>
+
+      <div class="hero-divider fade-2"></div>
+
+      <p class="hero-desc fade-2" data-lang="pt">
+     Cuidado ideal para seus casacos, com limpeza profunda e tratamento delicado para manter o tecido bonito, macio e protegido.
+      </p>
+      <p class="hero-desc fade-2" data-lang="es">
+      El cuidado ideal para tus abrigos, con una limpieza profunda y un tratamiento delicado para mantener el tejido bonito, suave y protegido.
+      </p>
+  
+      <button onclick="abrirModalLojas()" class="hero-cta fade-3" style="border:none;cursor:pointer;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+        <span data-lang="pt">Solicitar Orçamento</span>
+        <span data-lang="es">Solicitar Presupuesto</span>
+      </button>
+
+      <!-- MODAL LOJAS -->
+      <div id="modal-lojas" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
+        <!-- Overlay -->
+        <div onclick="fecharModalLojas()" style="position:absolute;inset:0;background:rgba(5,15,25,.75);backdrop-filter:blur(6px);"></div>
+        <!-- Card -->
+        <div style="position:relative;background:linear-gradient(160deg,#0d3a5e 0%,#0a2540 100%);border:1px solid rgba(143,192,220,.25);border-radius:20px;padding:36px 32px 32px;max-width:420px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.6);">
+          <!-- Fechar -->
+          <button onclick="fecharModalLojas()" style="position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.4rem;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.4)'">✕</button>
+
+          <!-- Ícone + Título -->
+          <div style="text-align:center;margin-bottom:24px;">
+            <div style="width:52px;height:52px;background:rgba(37,211,102,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#25d166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+            </div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#fff;margin-bottom:6px;" data-lang="pt">Escolha a loja mais próxima</h3>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#fff;margin-bottom:6px;" data-lang="es">Elija la tienda más cercana</h3>
+            <p style="font-size:.82rem;color:rgba(255,255,255,.5);letter-spacing:.06em;" data-lang="pt">Falaremos com você pelo WhatsApp</p>
+            <p style="font-size:.82rem;color:rgba(255,255,255,.5);letter-spacing:.06em;" data-lang="es">Le atenderemos por WhatsApp</p>
+          </div>
+
+          <!-- Botões das lojas -->
+          <div style="display:flex;flex-direction:column;gap:11px;">
+
+            <a href="https://wa.me/554832385501" target="_blank" rel="noopener" onclick="fecharModalLojas()" style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(143,192,220,.2);border-radius:12px;padding:14px 18px;text-decoration:none;transition:all .22s;" onmouseover="this.style.background='rgba(37,211,102,.12)';this.style.borderColor='rgba(37,211,102,.4)'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(143,192,220,.2)'">
+              <div style="width:38px;height:38px;background:rgba(37,211,102,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25d166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:600;font-size:.93rem;letter-spacing:.04em;">Loja Trindade</div>
+                <div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-top:2px;">(48) 3238-5501</div>
+              </div>
+              <svg style="margin-left:auto;opacity:.3;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+
+            <a href="https://wa.me/554891135400" target="_blank" rel="noopener" onclick="fecharModalLojas()" style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(143,192,220,.2);border-radius:12px;padding:14px 18px;text-decoration:none;transition:all .22s;" onmouseover="this.style.background='rgba(37,211,102,.12)';this.style.borderColor='rgba(37,211,102,.4)'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(143,192,220,.2)'">
+              <div style="width:38px;height:38px;background:rgba(37,211,102,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25d166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:600;font-size:.93rem;letter-spacing:.04em;">Lojas Centro</div>
+                <div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-top:2px;">(48) 9113-5400</div>
+              </div>
+              <svg style="margin-left:auto;opacity:.3;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+
+            <a href="https://wa.me/554891420129" target="_blank" rel="noopener" onclick="fecharModalLojas()" style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(143,192,220,.2);border-radius:12px;padding:14px 18px;text-decoration:none;transition:all .22s;" onmouseover="this.style.background='rgba(37,211,102,.12)';this.style.borderColor='rgba(37,211,102,.4)'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(143,192,220,.2)'">
+              <div style="width:38px;height:38px;background:rgba(37,211,102,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25d166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.557 4.13 1.529 5.863L0 24l6.335-1.521A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.722.893.924-3.622-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:600;font-size:.93rem;letter-spacing:.04em;">Loja Jurerê</div>
+                <div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-top:2px;">(48) 9142-0129</div>
+              </div>
+              <svg style="margin-left:auto;opacity:.3;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+
+          </div>
+
+          <p style="text-align:center;font-size:.74rem;color:rgba(255,255,255,.3);margin-top:18px;letter-spacing:.05em;" data-lang="pt">Você será redirecionado ao WhatsApp</p>
+          <p style="text-align:center;font-size:.74rem;color:rgba(255,255,255,.3);margin-top:18px;letter-spacing:.05em;" data-lang="es">Será redirigido a WhatsApp</p>
+        </div>
+      </div>
+
+      <!-- LABEL "VER NOSSO TRABALHO" -->
+      <div class="ver-trabalho-label fade-4">
+        <span data-lang="pt">Veja o nosso trabalho</span>
+        <span data-lang="es">Vea nuestro trabajo</span>
+      </div>
+    </div>
+
+    <!-- VÍDEOS -->
+    <div class="videos-stack fade-5">
+
+      <!-- Vídeo 1 -->
+      <div class="video-item">
+        <div class="video-label" data-lang="pt">Jaqueta de couro — Antes e Depois</div>
+        <div class="video-label" data-lang="es">Chaqueta de cuero — Antes y Después</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/QlNZh_6ZMss?si=O0Foj7tHcujLVTg3&amp;start=10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="video-separator">
+        <span data-lang="pt">mais vídeos</span>
+        <span data-lang="es">más vídeos</span>
+      </div>
+
+      <!-- Vídeo 2 -->
+      <div class="video-item">
+        <div class="video-label" data-lang="pt">Jaqueta de couro — Antes e Depois</div>
+        <div class="video-label" data-lang="es">Chaqueta de cuero — Antes y Después</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/QlNZh_6ZMss?si=O0Foj7tHcujLVTg3&amp;start=10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo-text">Lavação</div>
+        <div class="footer-logo-sub" data-lang="pt">Lavanderia · Florianópolis</div>
+        <div class="footer-logo-sub" data-lang="es">Lavandería · Florianópolis</div>
+        <p class="footer-tagline" data-lang="pt">Cuidado e tradição em cada peça. Quatro unidades em Florianópolis à sua disposição.</p>
+        <p class="footer-tagline" data-lang="es">Cuidado y tradición en cada prenda. Cuatro unidades en Florianópolis a tu disposición.</p>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <a href="https://www.instagram.com/lavanderialavacao/" target="_blank" rel="noopener" style="width:36px;height:36px;background:rgba(15,26,34,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f1a22" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#0f1a22" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="pt">Serviços</h4>
+        <h4 data-lang="es">Servicios</h4>
+        <ul>
+          <li><a href="index.html#servicos" data-lang="pt">Cortinas e Persianas</a><a href="#" data-lang="es">Cortinas y Persianas</a></li>
+          <li><a href="index.html#servicos" data-lang="pt">Tapetes</a><a href="index.html#servicos" data-lang="es">Alfombras</a></li>
+          <li><a href="index.html#servicos" data-lang="pt">Roupas do dia a dia</a><a href="index.html#servicos" data-lang="es">Ropa cotidiana</a></li>
+          <li><a href="index.html#servicos" data-lang="pt">Trajes Sociais</a><a href="index.html#servicos" data-lang="es">Vestimenta Formal</a></li>
+          <li><a href="index.html#servicos" data-lang="pt">Couro</a><a href="index.html#servicos" data-lang="es">Cuero</a></li>
+          <li><a href="#" data-lang="pt">Casacos</a><a href="#" data-lang="es">Abrigos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="pt">Navegação</h4>
+        <h4 data-lang="es">Navegación</h4>
+        <ul>
+          <li><a href="index.html" data-lang="pt">Início</a><a href="index.html" data-lang="es">Inicio</a></li>
+          <li><a href="index.html#sobre" data-lang="pt">Sobre Nós</a><a href="index.html#sobre" data-lang="es">Nosotros</a></li>
+          <li><a href="index.html#localizacao" data-lang="pt">Nossas Lojas</a><a href="index.html#localizacao" data-lang="es">Nuestras Tiendas</a></li>
+          <li><a href="index.html#localizacao" data-lang="pt">Agendar</a><a href="index.html#localizacao" data-lang="es">Reservar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="pt">Endereços</h4>
+        <h4 data-lang="es">Direcciones</h4>
+        <div class="footer-addresses">
+          <strong>Trindade</strong>Rua Des. Vítor Lima, 260
+          <strong>Centro</strong>Rua Dr. Armínio Tavares, 60
+          <strong>Mauro Ramos</strong>Av. Mauro Ramos, 413
+          <strong>Jurerê</strong>Rua Prof. Renato Barbosa, 258
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Lavanderia Lavação — Florianópolis, SC</span>
+      <a href="https://www.instagram.com/lavanderialavacao/" target="_blank" rel="noopener">@lavanderialavacao</a>
+    </div>
+  </footer>
+
+  <script>
+    function abrirModalLojas() {
+      const modal = document.getElementById('modal-lojas');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      // animate in
+      const card = modal.querySelector('div[style*="position:relative"]');
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(18px) scale(.97)';
+      card.style.transition = 'opacity .28s ease, transform .28s ease';
+      requestAnimationFrame(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    }
+
+    function fecharModalLojas() {
+      const modal = document.getElementById('modal-lojas');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') fecharModalLojas();
+    });
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    }
+
+    // Scroll reveal for videos
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.video-item').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = `opacity .6s ${i * 0.15}s ease, transform .6s ${i * 0.15}s ease`;
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
